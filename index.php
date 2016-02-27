@@ -1,6 +1,6 @@
 <?php
 
-require_once "assets/View.php";
+require_once "src/View.php";
 
 $view = new View();
 

@@ -3,94 +3,87 @@
 require 'CategoriaDAO.php';
 
 class CategoriaModel {
-    private $seq;
-    private $nome;
-    private $texto;
-    private $indicativo;
-    private $tipo;
-    private $ativo;
+    private $seqCategoria;
+    private $nomCategoria;
+    private $txtCategoria;
+    private $indCategoria;
+    private $tipGrupo;
+    private $datInativo;
 
     function __construct() {
         $this->CategoriaDAO = new CategoriaDAO();
     }
 
-    public function setSeq($seq) {
-        $this->seq = $seq;
+    public function setSeqCategoria($seqCategoria) {
+        $this->seqCategoria = $sseqCategoria;
     }
 
-    public function setNome($nome) {
-        $this->nome = $nome;
+    public function setNomCategoria($nomCategoria) {
+        $this->nomCategoria = $nomCategoria;
     }
 
-    public function setFrom($from) {
-        $this->from = $from;
+    public function setTxtCategoria($txtCategoria) {
+        $this->txtCategoria = $txtCategoria;
     }
 
-    public function setPhone($phone) {
-        $this->phone = str_replace("(","",str_replace(")","",str_replace("-","",$phone)));
+    public function setIndCategoria($indCategoria) {
+        $this->indCategoria = $indCategoria;
     }
 
-    public function setEmail($email) {
-        $this->email = $email;
+    public function setTipGrupo($tipGrupo) {
+        $this->tipGrupo = $tipGrupo;
     }
 
-    public function setDate($date) {
-       if(substr_count($date,"/") == 3){
-         list($dia, $mes, $ano) = explode("/", $date);
-         //$dia = substr($date, 0,2);
-         //$mes = substr($date, 3,2);
-         //$ano = substr($date, 6,4);
-         $this->date = date_format(date_create($ano."-".$mes."-".$dia),"Y-m-d");
-       } else {
-         $this->date = $date;
-       }
+    public function setDatInativo($datInativo) {
+         $this->datInativo = $datInativo;
     }
 
-    public function setMessage($message) {
-        $this->message = $message;
+    public function getSeqCategoria(){
+        return $this->seqCategoria;
     }
 
-    public function getSeq(){
-        return $this->seq;
+    public function getNomCategoria(){
+        return $this->nomCategoria;
     }
 
-    public function getTo(){
-        return $this->to;
+    public function getTxtCategoria(){
+        return $this->txtCategoria;
     }
 
-    public function getFrom(){
-        return $this->from;
+    public function getIndCategoria(){
+        return $this->indCategoria;
     }
 
-    public function getPhone(){
-        return $this->phone;
+    public function getTipGrupo(){
+        return $this->tipGrupo;
     }
 
-    public function getEmail(){
-        return $this->email;
-    }
-
-    public function getDate(){
-        return $this->date;
-    }
-    public function getMessage(){
-        return $this->message;
+    public function getDatInativo(){
+        return $this->datInativo;
     }
 
     public function gravar() {
-        if(!empty($this->getSeq())){
-           $this->timeCapsuleDAO->alterar($this);
+        if(!empty($this->getSeqCategoria())){
+           $this->CategoriaDAO->alterar($this);
         } else {
-           $this->timeCapsuleDAO->inserir($this);
+           $this->CategoriaDAO->inserir($this);
         }
         return true;
     }
 
-    public function consultar() {
-        return $this->timeCapsuleDAO->listar();
+    public function listarCategorias() {
+        return $this->categoriaDAO->listar();
+    }
+
+    public function listarCategoriasAtivas() {
+        return $this->categoriaDAO->listarAtivas();
+    }
+
+    public function desativarCategoria($seqCategoria) {
+        return $this->categoriaDAO->desativar($seqCategoria);
     }
 
     function __destruct() {
-        $timeCapsuleDAO = NULL;
+        $this->categoriaDAO = NULL;
     }
 }

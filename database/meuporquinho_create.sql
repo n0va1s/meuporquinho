@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS categoria (
   ,txt_categoria VARCHAR(255) NOT NULL
   ,ind_categoria CHAR(1) NOT NULL DEFAULT 'D' COMMENT 'R - receita, D - despesa'
   ,tip_grupo CHAR(3) NOT NULL COMMENT 'FIX - gastos fixos, HAB - habitacao, SAU - saude, AUT - automovel, PES - pessoal, LAZ - lazer, DEP - dependentes, INV - investimento, TAX - impostos e taxas'
-  ,ind_ativo CHAR(1) NOT NULL DEFAULT 'S' COMMENT 'S - sim, N - nao'
+  ,dat_inativo DATE
   ,PRIMARY KEY(seq_categoria)
 )
 ENGINE = InnoDB
@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS usuario (
   ,nom_usuario VARCHAR(50) NOT NULL DEFAULT ''
   ,eml_usuario varchar(255) NOT NULL DEFAULT ''
   ,tip_origem CHAR(3) NOT NULL DEFAULT 'GOO' COMMENT 'GOO - Google, FAC - Facebook'
+  ,dat_inativo DATE
   ,PRIMARY KEY (seq_usuario)
 )
 ENGINE = InnoDB
@@ -57,7 +58,7 @@ CREATE TABLE IF NOT EXISTS regra (
   ,seq_usuario INT(6) COMMENT 'Identificador o dono das regras'
   ,des_regra VARCHAR(255) NOT NULL
   ,tip_regra CHAR(3) NOT NULL DEFAULT 'LIK' COMMENT 'LIK - txt_lancamento que contem a regra, EXA - txt_lancamento com exatamente esta regra'
-  ,ind_ativo CHAR(1) NOT NULL DEFAULT 'S' COMMENT 'S - Sim ou N - Não'
+  ,dat_inativo DATE
   ,seq_categoria INT(6) NOT NULL COMMENT 'Identificador da categoria do lancamento'
   ,PRIMARY KEY (seq_regra, seq_usuario)
   ,FOREIGN KEY (seq_usuario) REFERENCES usuario(seq_usuario)

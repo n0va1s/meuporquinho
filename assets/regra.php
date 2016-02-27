@@ -6,7 +6,7 @@
 <body data-spy="scroll" data-target=".navbar" data-offset="60">
 
 <?php require_once "menu.php" ?>
-<?php require_once "login.php" ?>
+<?php require_once "apresentacao.php" ?>
 
 <div id="regra" class="container-fluid">
   <table class="table">

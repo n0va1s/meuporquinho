@@ -2,7 +2,7 @@
 
 require_once 'Conexao.php';
 
-class TimeCapsuleDAO {
+class RegraDAO {
 
     private $conn;
 
@@ -10,104 +10,101 @@ class TimeCapsuleDAO {
         $this->conn = Conexao::conectar();
     }
 
-    public function inserir(TimeCapsuleModel $model) {
+    public function inserir(RegraModel $model) {
         try {
-            $query = "insert into message (nam_to_message,nam_from_message,
-                                           dat_message,eml_message,
-                                           tel_message,txt_message)
-                                   values (:nam_to_message,:nam_from_message,
-                                           :dat_message,:eml_message,
-                                           :tel_message,:txt_message)";
+            $query = "insert into regra (seq_usuario,des_regra,
+                                         tip_regra,dat_inativo,
+                                         seq_categoria)
+                                   values (:seq_usuario,:des_regra,
+                                           :tip_regra,:dat_inativo,
+                                           :seq_categoria)";
+
             $stmt = $this->conn->prepare($query);
 
-            $stmt->bindValue(":nam_to_message", $model->getTo());
-            $stmt->bindValue(":nam_from_message", $model->getFrom());
-            $stmt->bindValue(":dat_message", $model->getDate());
-            $stmt->bindValue(":eml_message", $model->getEmail());
-            $stmt->bindValue(":tel_message", $model->getPhone());
-            $stmt->bindValue(":txt_message", $model->getMessage());
+            $stmt->bindValue(":seq_usuario", $model->getSeqUsuario());
+            $stmt->bindValue(":des_regra", $model->getDesRegra());
+            $stmt->bindValue(":tip_regra", $model->getTipRegra());
+            $stmt->bindValue(":dat_inativo", $model->getDatInativo());
+            $stmt->bindValue(":seq_categoria", $model->getSeqCategoria());
 
             return $stmt->execute();
        } catch (Exception $e) {
-            echo "Erro ao incluir a mensagem \n".$e->getMessage();
+            echo "Erro ao incluir a regra \n".$e->getMessage();
         }
     }
    //Altera todas as informacoes cadastradas
-    public function alterar(TimeCapsuleModel $model) {
+    public function alterar(RegraModel $model) {
         try {
-            $query = "update message
-                        set nam_to_message = :nam_to_message,
-                            nam_from_message = :nam_from_message,
-                            dat_message = :dat_message,
-                            eml_message = :eml_message,
-                            tel_message = :tel_message,
-                            txt_message = :txt_message
-                      where seq_message = :seq_message";
+            $query = "update regra
+                        set seq_usuario = :seq_usuario,
+                            des_regra = :des_regra,
+                            tip_regra = :tip_regra,
+                            dat_inativo = :dat_inativo,
+                            seq_categoria = :seq_categoria
+                      where seq_regra = :seq_regra";
 
             $stmt = $this->conn->prepare($query);
 
-            $stmt->bindValue(":nam_to_message", $model->getTo());
-            $stmt->bindValue(":nam_from_message", $model->getFrom());
-            $stmt->bindValue(":dat_message", $model->getDate());
-            $stmt->bindValue(":eml_message", $model->getEmail());
-            $stmt->bindValue(":tel_message", $model->getPhone());
-            $stmt->bindValue(":txt_message", $model->getMessage());
-            $stmt->bindValue(":seq_message", $model->getSeq());
+            $stmt->bindValue(":seq_usuario", $model->getSeqUsuario());
+            $stmt->bindValue(":des_regra", $model->getDesRegra());
+            $stmt->bindValue(":tip_regra", $model->getTipRegra());
+            $stmt->bindValue(":dat_inativo", $model->getDatInativo());
+            $stmt->bindValue(":seq_categoria", $model->getSeqCategoria());
+            $stmt->bindValue(":seq_regra", $model->getSeqRegra());
 
             return $stmt->execute();
        } catch (Exception $e) {
-            echo "Erro ao alterar a mensagem \n".$e->getMessage();
+            echo "Erro ao alterar a regra \n".$e->getMessage();
         }
     }
 
-    //Lista todas as mensagens cadastradas
+    //Lista todas as regras cadastradas
     public function listar() {
         try {
            $query = "select *
-                       from message m";
+                       from regra";
 
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
             return $stmt->fetchAll();
 
         } catch (Exception $e) {
-            echo "Erro ao listar as mensagens \n".$e->getMessage();
+            echo "Erro ao listar as regras \n".$e->getMessage();
         }
     }
 
-    //Consulta todas as mensagens a serem enviadas ate o dia de hoje
-    public function consultarCapsulasParaEnvio() {
+    //Lista todas as regras ativas cadastradas
+    public function listarInativas() {
         try {
            $query = "select *
-                       from message m
-                     where dat_message <= DATE_FORMAT(NOW(),'%Y-%m-%d')
-                       and m.ind_enviado = 'N'";
+                       from regra
+                     where dat_inativo is not null";
 
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
             return $stmt->fetchAll();
 
         } catch (Exception $e) {
-            echo "Erro ao consultar as mensagens para envio \n".$e->getMessage();
+            echo "Erro ao listar as regras inativas \n".$e->getMessage();
         }
     }
-    //Altera a situacao da capsula para enviada
-    public function atualizarCapsulaEnviada($seq) {
+    //Altera a data de inativo, desativando a regra
+    public function desativar($seqRegra) {
         try {
-          $query = "update message
-                        set ind_enviado = :ind_enviado
-                      where seq_message = :seq_message";
+          $query = "update regra
+                        set dat_inativo = :dat_inativo
+                      where seq_regra = :seq_regra";
 
           $stmt = $this->conn->prepare($query);
 
-          $stmt->bindValue(":ind_enviado", "S");
-          $stmt->bindValue(":seq_message", $seq);
+          $stmt->bindValue(":dat_inativo", date("Y-m-d"));
+          $stmt->bindValue(":seq_regra", $seqRegra);
           //Debug
           //echo $stmt->debugDumpParams();
           //var_dump($stmt->errorInfo());
           return $stmt->execute();
       } catch (Exception $e) {
-          echo "Erro ao alterar a situacao da mensagem \n".$e->getMessage();
+          echo "Erro ao desativar a regra \n".$e->getMessage();
       }
     }
 

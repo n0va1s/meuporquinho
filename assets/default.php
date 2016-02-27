@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <?php require_once "assets/cabecalho.php" ?>
+  <?php require_once "cabecalho.php" ?>
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="60">
 
-<?php require_once "assets/menu.php" ?>
-<?php require_once "assets/login.php" ?>
+<?php require_once "menu.php" ?>
+<?php require_once "apresentacao.php" ?>
 
 <div id="geral" class="container-fluid">
   <table class="table">
@@ -82,7 +82,7 @@
   </div>
 </div>
 
-<?php require_once "assets/rodape.php" ?>
+<?php require_once "rodape.php" ?>
 
 </body>
 </html>

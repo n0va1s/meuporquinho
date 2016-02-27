@@ -1,96 +1,108 @@
 <?php
 
-require 'CategoriaDAO.php';
+require 'LancamentoDAO.php';
 
-class CategoriaModel {
-    private $seq;
-    private $nome;
-    private $texto;
-    private $indicativo;
-    private $tipo;
-    private $ativo;
+class LancamentoModel {
+    private $seqUsuario;
+    private $datLancamento;
+    private $diaLancamento;
+    private $mesLancamento;
+    private $anoLancamento;
+    private $valLancamento;
+    private $numLancamento;
+    private $txtLancamento;
+    private $seqCategoria;
 
     function __construct() {
-        $this->CategoriaDAO = new CategoriaDAO();
+        $this->lancamentoDAO = new LancamentoDAO();
     }
 
-    public function setSeq($seq) {
-        $this->seq = $seq;
+    public function setSeqUsuario($seqUsuario) {
+        $this->seqUsuario = $seqUsuario;
     }
 
-    public function setNome($nome) {
-        $this->nome = $nome;
+    public function setDatLancamento($datLancamento) {
+        $this->datLancamento = $datLancamento;
     }
 
-    public function setFrom($from) {
-        $this->from = $from;
+    public function setDiaLancamento($diaLancamento) {
+        $this->diaLancamento = $diaLancamento;
     }
 
-    public function setPhone($phone) {
-        $this->phone = str_replace("(","",str_replace(")","",str_replace("-","",$phone)));
+    public function setMesLancamento($mesLancamento) {
+        $this->mesLancamento = $mesLancamento;
     }
 
-    public function setEmail($email) {
-        $this->email = $email;
+    public function setAnoLancamento($anoLancamento) {
+        $this->anoLancamento = $anoLancamento;
     }
 
-    public function setDate($date) {
-       if(substr_count($date,"/") == 3){
-         list($dia, $mes, $ano) = explode("/", $date);
-         //$dia = substr($date, 0,2);
-         //$mes = substr($date, 3,2);
-         //$ano = substr($date, 6,4);
-         $this->date = date_format(date_create($ano."-".$mes."-".$dia),"Y-m-d");
-       } else {
-         $this->date = $date;
-       }
+    public function setValLancamento($valLancamento) {
+        $this->valLancamento = $valLancamento;
     }
 
-    public function setMessage($message) {
-        $this->message = $message;
+    public function setNumLancamento($numLancamento) {
+        $this->numLancamento = $numLancamento;
     }
 
-    public function getSeq(){
-        return $this->seq;
+    public function setTxtLancamento($txtLancamento) {
+        $this->txtLancamento = $txtLancamento;
     }
 
-    public function getTo(){
-        return $this->to;
+    public function setSeqCategoria($seqCategoria) {
+        $this->seqCategoria = $seqCategoria;
     }
 
-    public function getFrom(){
-        return $this->from;
+    public function getSeqUsuario() {
+        return $this->seqUsuario;
     }
 
-    public function getPhone(){
-        return $this->phone;
+    public function getDatLancamento() {
+        return $this->datLancamento;
     }
 
-    public function getEmail(){
-        return $this->email;
+    public function getDiaLancamento() {
+        return $this->diaLancamento;
     }
 
-    public function getDate(){
-        return $this->date;
+    public function getMesLancamento() {
+        return $this->mesLancamento;
     }
-    public function getMessage(){
-        return $this->message;
+
+    public function getAnoLancamento() {
+        return $this->anoLancamento;
+    }
+
+    public function getValLancamento() {
+        return $this->valLancamento;
+    }
+
+    public function getNumLancamento() {
+        return $this->numLancamento;
+    }
+
+    public function getTxtLancamento() {
+        return $this->txtLancamento;
+    }
+
+    public function getSeqCategoria() {
+        return $this->seqCategoria;
     }
 
     public function gravar() {
-        if(!empty($this->getSeq())){
-           $this->timeCapsuleDAO->alterar($this);
+        if(!empty($this->getSeqLancamento())){
+           $this->lancamentoDAO->alterar($this);
         } else {
-           $this->timeCapsuleDAO->inserir($this);
+           $this->lancamentoDAO->inserir($this);
         }
         return true;
     }
 
-    public function consultar() {
-        return $this->timeCapsuleDAO->listar();
+    public function listarLancamentos() {
+        return $this->lancamentoDAO->listar();
     }
 
     function __destruct() {
-        $timeCapsuleDAO = NULL;
+        $this->lancamentoDAO = NULL;
     }
 }

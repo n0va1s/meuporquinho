@@ -1,96 +1,89 @@
 <?php
 
-require 'CategoriaDAO.php';
+require 'RegraDAO.php';
 
-class CategoriaModel {
-    private $seq;
-    private $nome;
-    private $texto;
-    private $indicativo;
-    private $tipo;
-    private $ativo;
+class RegraModel {
+    private $seqRegra;
+    private $seqUsuario;
+    private $desRegra;
+    private $tipRegra;
+    private $datInativo;
+    private $seqCategoria;
 
     function __construct() {
-        $this->CategoriaDAO = new CategoriaDAO();
+        $this->regraDAO = new RegraDAO();
     }
 
-    public function setSeq($seq) {
-        $this->seq = $seq;
+    public function setSeqRegra($seqRegra) {
+        $this->seqRegra = $seqRegra;
     }
 
-    public function setNome($nome) {
-        $this->nome = $nome;
+    public function setSeqUsuario($seqUsuario) {
+        $this->seqUsuario = $seqUsuario;
     }
 
-    public function setFrom($from) {
-        $this->from = $from;
+    public function setDesRegra($desRegra) {
+        $this->desRegra = $desRegra;
     }
 
-    public function setPhone($phone) {
-        $this->phone = str_replace("(","",str_replace(")","",str_replace("-","",$phone)));
+    public function setTipRegra($tipRegra) {
+        $this->tipRegra = $tipRegra;
     }
 
-    public function setEmail($email) {
-        $this->email = $email;
+    public function setDatInativo($datInativo) {
+        $this->datInativo = $datInativo;
     }
 
-    public function setDate($date) {
-       if(substr_count($date,"/") == 3){
-         list($dia, $mes, $ano) = explode("/", $date);
-         //$dia = substr($date, 0,2);
-         //$mes = substr($date, 3,2);
-         //$ano = substr($date, 6,4);
-         $this->date = date_format(date_create($ano."-".$mes."-".$dia),"Y-m-d");
-       } else {
-         $this->date = $date;
-       }
+    public function setSeqCategoria($seqCategoria) {
+       $this->seqCategoria = $seqCategoria;
     }
 
-    public function setMessage($message) {
-        $this->message = $message;
+    public function getSeqRegra(){
+        return $this->seqRegra;
     }
 
-    public function getSeq(){
-        return $this->seq;
+    public function getSeqUsuario(){
+        return $this->seqUsuario;
     }
 
-    public function getTo(){
-        return $this->to;
+    public function getDesRegra(){
+        return $this->desRegra;
     }
 
-    public function getFrom(){
-        return $this->from;
+    public function getTipRegra(){
+        return $this->tipRegra;
     }
 
-    public function getPhone(){
-        return $this->phone;
+    public function getDatInativo(){
+        return $this->datInativo;
     }
 
-    public function getEmail(){
-        return $this->email;
-    }
-
-    public function getDate(){
-        return $this->date;
-    }
-    public function getMessage(){
-        return $this->message;
+    public function getSeqCategoria(){
+        return $this->seqCategoria;
     }
 
     public function gravar() {
-        if(!empty($this->getSeq())){
-           $this->timeCapsuleDAO->alterar($this);
+        if(!empty($this->getSeqRegra())){
+           $this->regraDAO->alterar($this);
         } else {
-           $this->timeCapsuleDAO->inserir($this);
+           $this->regraDAO->inserir($this);
         }
         return true;
     }
 
-    public function consultar() {
-        return $this->timeCapsuleDAO->listar();
+    public function listar() {
+        return $this->regraDAO->listar();
+    }
+
+    public function listarRegrasAtivas() {
+        return $this->regraDAO->listarAtivas();
+    }
+
+    public function desativarRegra($seqRegra) {
+        return $this->regraDAO->desativar($seqRegra);
     }
 
     function __destruct() {
-        $timeCapsuleDAO = NULL;
+        $this->regraDAO = NULL;
     }
 }

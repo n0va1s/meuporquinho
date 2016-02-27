@@ -2,7 +2,7 @@
 
 require_once 'Conexao.php';
 
-class TimeCapsuleDAO {
+class UsuarioDAO {
 
     private $conn;
 
@@ -10,104 +10,71 @@ class TimeCapsuleDAO {
         $this->conn = Conexao::conectar();
     }
 
-    public function inserir(TimeCapsuleModel $model) {
+    public function inserir(UsuarioModel $model) {
         try {
-            $query = "insert into message (nam_to_message,nam_from_message,
-                                           dat_message,eml_message,
-                                           tel_message,txt_message)
-                                   values (:nam_to_message,:nam_from_message,
-                                           :dat_message,:eml_message,
-                                           :tel_message,:txt_message)";
+            $query = "insert into usuario (nom_usuario,eml_usuario,tip_origem,ind_ativo)
+                                   values (:nom_usuario,:eml_usuario,:tip_origem,:ind_ativo)";
             $stmt = $this->conn->prepare($query);
 
-            $stmt->bindValue(":nam_to_message", $model->getTo());
-            $stmt->bindValue(":nam_from_message", $model->getFrom());
-            $stmt->bindValue(":dat_message", $model->getDate());
-            $stmt->bindValue(":eml_message", $model->getEmail());
-            $stmt->bindValue(":tel_message", $model->getPhone());
-            $stmt->bindValue(":txt_message", $model->getMessage());
+            $stmt->bindValue(":nom_usuario", $model->getNomUsuario());
+            $stmt->bindValue(":eml_usuario", $model->getEmlUsuario());
+            $stmt->bindValue(":tip_origem", $model->getTipOrigem());
+            $stmt->bindValue(":dat_inativo", $model->getDatInativo());
 
             return $stmt->execute();
        } catch (Exception $e) {
-            echo "Erro ao incluir a mensagem \n".$e->getMessage();
-        }
-    }
-   //Altera todas as informacoes cadastradas
-    public function alterar(TimeCapsuleModel $model) {
-        try {
-            $query = "update message
-                        set nam_to_message = :nam_to_message,
-                            nam_from_message = :nam_from_message,
-                            dat_message = :dat_message,
-                            eml_message = :eml_message,
-                            tel_message = :tel_message,
-                            txt_message = :txt_message
-                      where seq_message = :seq_message";
-
-            $stmt = $this->conn->prepare($query);
-
-            $stmt->bindValue(":nam_to_message", $model->getTo());
-            $stmt->bindValue(":nam_from_message", $model->getFrom());
-            $stmt->bindValue(":dat_message", $model->getDate());
-            $stmt->bindValue(":eml_message", $model->getEmail());
-            $stmt->bindValue(":tel_message", $model->getPhone());
-            $stmt->bindValue(":txt_message", $model->getMessage());
-            $stmt->bindValue(":seq_message", $model->getSeq());
-
-            return $stmt->execute();
-       } catch (Exception $e) {
-            echo "Erro ao alterar a mensagem \n".$e->getMessage();
+            echo "Erro ao incluir o usuario \n".$e->getMessage();
         }
     }
 
-    //Lista todas as mensagens cadastradas
+    //Lista todos os usuario cadastrados
     public function listar() {
         try {
            $query = "select *
-                       from message m";
+                       from usuario";
 
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
             return $stmt->fetchAll();
 
         } catch (Exception $e) {
-            echo "Erro ao listar as mensagens \n".$e->getMessage();
+            echo "Erro ao listar os usuarios \n".$e->getMessage();
         }
     }
 
-    //Consulta todas as mensagens a serem enviadas ate o dia de hoje
-    public function consultarCapsulasParaEnvio() {
+    //Lista os usuario ativos
+    public function listarAtivos() {
         try {
            $query = "select *
-                       from message m
-                     where dat_message <= DATE_FORMAT(NOW(),'%Y-%m-%d')
-                       and m.ind_enviado = 'N'";
+                       from usuario
+                     where dat_inativo is not null";
 
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
             return $stmt->fetchAll();
 
         } catch (Exception $e) {
-            echo "Erro ao consultar as mensagens para envio \n".$e->getMessage();
+            echo "Erro ao listar os usuarios ativos \n".$e->getMessage();
         }
     }
-    //Altera a situacao da capsula para enviada
-    public function atualizarCapsulaEnviada($seq) {
+
+    //Altera a situacao do usuario para inativo
+    public function desativar($seqUsuario) {
         try {
-          $query = "update message
-                        set ind_enviado = :ind_enviado
-                      where seq_message = :seq_message";
+          $query = "update usuario
+                        set dat_inativo = :dat_inativo
+                      where seq_usuario = :seq_usuario";
 
           $stmt = $this->conn->prepare($query);
 
-          $stmt->bindValue(":ind_enviado", "S");
-          $stmt->bindValue(":seq_message", $seq);
+          $stmt->bindValue(":dat_inativo", date("Y-m-d"););
+          $stmt->bindValue(":seq_usuario", $seqUsuario);
           //Debug
           //echo $stmt->debugDumpParams();
           //var_dump($stmt->errorInfo());
           return $stmt->execute();
       } catch (Exception $e) {
-          echo "Erro ao alterar a situacao da mensagem \n".$e->getMessage();
+          echo "Erro ao desativar o usuario \n".$e->getMessage();
       }
     }
 

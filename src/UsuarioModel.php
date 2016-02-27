@@ -1,96 +1,76 @@
 <?php
 
-require 'CategoriaDAO.php';
+require 'UsuarioDAO.php';
 
 class CategoriaModel {
-    private $seq;
-    private $nome;
-    private $texto;
-    private $indicativo;
-    private $tipo;
-    private $ativo;
+    private $seqUsuario;
+    private $nomUsuario;
+    private $emlUsuario;
+    private $tipOrigem;
+    private $datInativo;
 
     function __construct() {
-        $this->CategoriaDAO = new CategoriaDAO();
+        $this->UsuarioDAO = new UsuarioDAO();
     }
 
-    public function setSeq($seq) {
-        $this->seq = $seq;
+    public function setSequsuario($seqUsuario) {
+        $this->seqUsuario = $seqUsuario;
     }
 
-    public function setNome($nome) {
-        $this->nome = $nome;
+    public function setNomUsuario($nomUsuario) {
+        $this->nomUsuario = $nomUsuario;
     }
 
-    public function setFrom($from) {
-        $this->from = $from;
+    public function setEmlUsuario($emlUsuario) {
+        $this->emlUsuario = $emlUsuario;
     }
 
-    public function setPhone($phone) {
-        $this->phone = str_replace("(","",str_replace(")","",str_replace("-","",$phone)));
+    public function setTipOrigem($tipOrigem) {
+        $this->tipOrigem = $tipOrigem;
     }
 
-    public function setEmail($email) {
-        $this->email = $email;
+    public function setDatInativo($datInativo) {
+        $this->datInativo = $datInativo;
     }
 
-    public function setDate($date) {
-       if(substr_count($date,"/") == 3){
-         list($dia, $mes, $ano) = explode("/", $date);
-         //$dia = substr($date, 0,2);
-         //$mes = substr($date, 3,2);
-         //$ano = substr($date, 6,4);
-         $this->date = date_format(date_create($ano."-".$mes."-".$dia),"Y-m-d");
-       } else {
-         $this->date = $date;
-       }
+    public function getSeqUsuario(){
+        return $this->seqUsuario;
     }
 
-    public function setMessage($message) {
-        $this->message = $message;
+    public function getEmlUsuario(){
+        return $this->emlUsuario;
     }
 
-    public function getSeq(){
-        return $this->seq;
+    public function getTipOrigem(){
+        return $this->tipOrigem;
     }
 
-    public function getTo(){
-        return $this->to;
-    }
-
-    public function getFrom(){
-        return $this->from;
-    }
-
-    public function getPhone(){
-        return $this->phone;
-    }
-
-    public function getEmail(){
-        return $this->email;
-    }
-
-    public function getDate(){
-        return $this->date;
-    }
-    public function getMessage(){
-        return $this->message;
+    public function getDatInativo(){
+        return $this->datInativo;
     }
 
     public function gravar() {
-        if(!empty($this->getSeq())){
-           $this->timeCapsuleDAO->alterar($this);
+        if(!empty($this->getSeqUsuario())){
+           $this->usuarioDAO->alterar($this);
         } else {
-           $this->timeCapsuleDAO->inserir($this);
+           $this->usuarioDAO->inserir($this);
         }
         return true;
     }
 
-    public function consultar() {
-        return $this->timeCapsuleDAO->listar();
+    public function listarUsuarios() {
+        return $this->usuarioDAO->listar();
+    }
+
+    public function listarUsuariosAtivos() {
+        return $this->usuarioDAO->listarAtivos();
+    }
+
+    public function desativarUsuario($seqUsuario) {
+        return $this->usuarioDAO->desativar($seqUsuario);
     }
 
     function __destruct() {
-        $timeCapsuleDAO = NULL;
+        $this->usuarioDAO = NULL;
     }
 }

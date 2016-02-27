@@ -9,14 +9,14 @@ class View
         $rota = parse_url("http://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]);
         $destino = trim(str_replace("/","", $rota["path"]));
         //Caso nao tenha uma rota definida, redirecionar para a pagina de inicio
-        $path = (!isset($destino) ? "./assets/$destino.php" : "./assets/geral.php");
+        $path = (!isset($destino) ? "./assets/$destino.php" : "./assets/default.php");
       } else {
         //apresentar a pagina solicitada
         $path = "./assets/$pagina.php";
       }
       //"" e a raiz do site
       //Verificar se a pagina solciitada esta dentro das opcoes validas
-      $menu = array("", "geral", "arquivo", "grafico", "regra", "login", "menu", "rodape");
+      $menu = array("", "default", "arquivo", "grafico", "regra", "login");
       if(in_array(isset($destino) ? $destino : $pagina, $menu) AND file_exists($path)){
         require_once $path;
       } else {

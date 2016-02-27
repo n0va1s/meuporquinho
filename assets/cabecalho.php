@@ -1,5 +1,4 @@
-<!-- Theme Made By www.w3schools.com - No Copyright -->
-<title>Bootstrap Theme Company Page</title>
+<title>meuporquinho - finanças pessoais</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -7,6 +6,8 @@
 <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<!--[if IE]><link rel="shortcut icon" href="assets/img/favicon.ico"><![endif]-->
+<link rel="icon" href="/assets/img/favicon.ico">
 <style>
 body {
     font: 400 15px Lato, sans-serif;

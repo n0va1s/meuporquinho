@@ -6,13 +6,14 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/">Início</a>
+      <a href="/" class="navbar-brand" href="/"><span class="glyphicon glyphicon-home">Início</span></a>
     </div>
     <div class="collapse navbar-collapse" id="menu">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="/assets/arquivo.php"><span class="glyphicon glyphicon-search"> ARQUIVOS</span></a></li>
-        <li><a href="/assets/grafico.php"><span class="glyphicon glyphicon-search"> GRÁFICOS</span></a></li>
-        <li><a href="/assets/regra.php"><span class="glyphicon glyphicon-search"> REGRAS</span></a></li>
+        <li><a href="/assets/arquivo.php"><span class="glyphicon glyphicon-paperclip"> ARQUIVOS</span></a></li>
+        <li><a href="/assets/grafico.php"><span class="glyphicon glyphicon-stats"> GRÁFICOS</span></a></li>
+        <li><a href="/assets/regra.php"><span class="glyphicon glyphicon-th-list"> REGRAS</span></a></li>
+        <li><a href="/assets/login.php"><span class="glyphicon glyphicon-user"> LOGIN</span></a></li>
       </ul>
     </div>
   </div>

@@ -10,6 +10,7 @@
     </div>
     <div class="collapse navbar-collapse" id="menu">
       <ul class="nav navbar-nav navbar-right">
+        <li><a href="/assets/orcamento.php"><span class="glyphicon glyphicon-time"> ORÇAMENTO</span></a></li>
         <li><a href="/assets/arquivo.php"><span class="glyphicon glyphicon-paperclip"> ARQUIVOS</span></a></li>
         <li><a href="/assets/grafico.php"><span class="glyphicon glyphicon-stats"> GRÁFICOS</span></a></li>
         <li><a href="/assets/regra.php"><span class="glyphicon glyphicon-th-list"> REGRAS</span></a></li>

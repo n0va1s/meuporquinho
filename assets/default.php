@@ -8,7 +8,13 @@
 <?php require_once "menu.php" ?>
 <?php require_once "apresentacao.php" ?>
 
-<div id="geral" class="container-fluid">
+<div id="execucao" class="container-fluid">
+  <div class="col-md-12 form-group">
+    <input type="text" id="valor">
+    <button class="btn btn-primary pull-right" type="submit">
+      <span class="glyphicon glyphicon-plus">Lançamento Manual</span>
+    </button>
+  </div>
   <table class="table">
     <thead>
       <tr>
@@ -75,11 +81,6 @@
       </tr>
     </tbody>
   </table>
-  <div class="col-md-12 form-group">
-    <br />
-    <button class="btn btn-primary pull-right" type="submit">
-      <span class="glyphicon glyphicon-search"> Manual</span></button>
-  </div>
 </div>
 
 <?php require_once "rodape.php" ?>

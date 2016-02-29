@@ -22,6 +22,7 @@ class LancamentoDAO {
                                            :ano_lancamento,:val_lancamento,
                                            :num_lancamento,:txt_lancamento,
                                            :seq_categoria)";
+
             $stmt = $this->conn->prepare($query);
 
             $stmt->bindValue(":seq_usuario", $model->getSeqUsuario());

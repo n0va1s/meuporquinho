@@ -1,39 +1,37 @@
 <?php
 
-require_once 'TimeCapsuleView.php';
-require_once 'TimeCapsuleModel.php';
+require_once 'RegraView.php';
+require_once 'RegraModel.php';
 
-class TimeCapsuleController
+class RegraController
 {
 
     private $view;
+    private $model;
 
     public function __construct(){
-        $this->view = new TimeCapsuleView();
+      $this->view = new RegraView();
+      $this->model = new RegraModel();
     }
 
-    public function exibir($pagina){
-        $this->view->render($pagina);
-    }
+    public function executar(){
+      //Exibir a pagina
+      $this->view->exibir($pagina);
 
-    public function lacrar(){
-        $model = new TimeCapsuleModel();
-        $model->setTo(isset($_POST["to"]) ? $_POST["to"] : "");
-        $model->setFrom(isset($_POST["from"]) ? $_POST["from"] : "");
-        $model->setDate(isset($_POST["date"]) ? $_POST["date"] : "");
-        $model->setEmail(isset($_POST["email"]) ? $_POST["email"] : "");
-        $model->setPhone(isset($_POST["phone"]) ? $_POST["phone"] : "");
-        $model->setMessage(isset($_POST["message"]) ? $_POST["message"] : "");
-        $sucesso = $model->gravar($model);
+      $acao = isset($_POST["acao"]) ? $_POST["acao"] : "");
+      $this->model->setSeqRegra = isset($_POST["seqRegra"]) ? $_POST["seqRegra"] : "");
+      $this->model->setTipRegra = isset($_POST["tipRegra"]) ? $_POST["tipRegra"] : "");
+      $this->model->setSeqCategoria = isset($_POST["seqCategoria"]) ? $_POST["seqCategoria"] : "");
 
-        if($sucesso){
-            $this->exibir("sucesso");
-        } else {
-            $this->exibir("erro");
-        }
+      if ($acao == "Editar")
+        $this->model->gravar($this->model);
+      elseif ($acao == "Excluir") {
+        $this->model->excluir($this->model);
+      }
     }
 
     public function __destruct(){
-        $this->view = NULL;
+      $this->view = NULL;
+      $this->model = NULL;
     }
 }

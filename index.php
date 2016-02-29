@@ -1,8 +1,6 @@
 <?php
 
-require_once "src/View.php";
-
-$view = new View();
+  require_once "src/InicioController.php";
 
   //PHP < 5.4
   if (!function_exists('http_response_code')) {
@@ -64,6 +62,47 @@ $view = new View();
       return $cod_atual;
     }
   }
-
-  //Executar a pagina solicitada
-  $view->exibir();
+  //Valida a URL e identifica a pagina de destino
+  function validar(){
+    $rota = parse_url("http://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]);
+    $destino = trim(str_replace("/","", $rota["path"]));
+    if(empty($destino)){
+      return "default";
+    } else {
+      //"" e a raiz do site
+      //Verificar se a pagina solciitada esta dentro das opcoes validas
+      $menu = array("orcamento","arquivo","grafico","regra","login");
+      if(in_array($destino, $menu) AND file_exists("./assets/$destino.php")){
+        return $destino;
+      } else {
+        http_response_code(404);
+        //exibir("erro");
+      }
+    }
+  }
+  //Encaminha a requisicao para o controller especifico
+  function rotear($pagina){
+    switch ($pagina) {
+    case "arquivo":
+        $controller = new ArquivoController();
+        $controller->executar();
+        break;
+    case "grafico":
+        $controller = new GraficoController();
+        $controller->executar();
+        break;
+    case "regra":
+        $controller = new RegraController();
+        $controller->executar();
+        break;
+    case "login":
+        $controller = new LoginController();
+        $controller->executar();
+        break;
+    default:
+        $controller = new InicioController();
+        $controller->executar();
+    }
+  }
+//Identifica a pagina solicita na URL e chama o controlador especifico
+rotear(validar());

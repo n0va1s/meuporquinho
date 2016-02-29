@@ -2,18 +2,19 @@
 
 require 'UsuarioDAO.php';
 
-class CategoriaModel {
+class UsuarioModel {
     private $seqUsuario;
     private $nomUsuario;
     private $emlUsuario;
     private $tipOrigem;
+    private $senUsuario;
     private $datInativo;
 
     function __construct() {
-        $this->UsuarioDAO = new UsuarioDAO();
+        $this->usuarioDAO = new UsuarioDAO();
     }
 
-    public function setSequsuario($seqUsuario) {
+    public function setSeqUsuario($seqUsuario) {
         $this->seqUsuario = $seqUsuario;
     }
 
@@ -29,12 +30,20 @@ class CategoriaModel {
         $this->tipOrigem = $tipOrigem;
     }
 
+    public function setSenUsuario($senUsuario) {
+        $this->senUsuario = $senUsuario;
+    }
+
     public function setDatInativo($datInativo) {
         $this->datInativo = $datInativo;
     }
 
     public function getSeqUsuario(){
         return $this->seqUsuario;
+    }
+
+    public function getNomUsuario(){
+        return $this->nomUsuario;
     }
 
     public function getEmlUsuario(){
@@ -45,8 +54,27 @@ class CategoriaModel {
         return $this->tipOrigem;
     }
 
+    public function getSenUsuario(){
+        return $this->senUsuario;
+    }
+
     public function getDatInativo(){
         return $this->datInativo;
+    }
+
+    public function autenticar() {
+        if($this->getEmlUsuario() == "GOO"){
+          //chamar a autenticacao do Google
+        } elseif ($this->getEmlUsuario() == "FAC") {
+          //chamar a autenticacao do Facebook
+        } else { //autenticacao na base local
+          if(!empty($this->getEmlUsuario()) && !empty($this->getSenUsuario())){
+             $this->usuarioDAO->logar();
+             return true;
+          } else {
+            return false;
+          }
+        }
     }
 
     public function gravar() {

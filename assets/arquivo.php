@@ -11,7 +11,7 @@
 <div id="arquivo" class="container-fluid bg-grey">
   <h2 class="text-center">Importar o arquivo (OFX)</h2>
     <div class="row">
-      <form id="frmArquivo" action="/src/ArquivoController.php" method="post" enctype="multipart/form-data">
+      <form id="frmArquivo" action="../src/LancamentoController.php" method="post" enctype="multipart/form-data">
         <label for="arquivo">Arquivo (OFX):</label>
         <input type="file" class="form-control" id="arquivo" name="arquivo" required>
         <br />

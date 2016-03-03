@@ -69,7 +69,6 @@ INSERT INTO categoria(nom_categoria,txt_categoria,ind_categoria,tip_grupo) VALUE
 INSERT INTO categoria(nom_categoria,txt_categoria,ind_categoria,tip_grupo) VALUES("Vestuário","O valor gasto com roupas para o seu filho","D","DEP");
 INSERT INTO categoria(nom_categoria,txt_categoria,ind_categoria,tip_grupo) VALUES("Pensão","D","O valor gasto com pensão para seus filhos","DEP");
 #Investimento
-INSERT INTO categoria(nom_categoria,txt_categoria,ind_categoria,tip_grupo) VALUES("Aposentadoria","O valor mensal ou eventual investido para sua aposentadoria","D","INV");
 INSERT INTO categoria(nom_categoria,txt_categoria,ind_categoria,tip_grupo) VALUES("Dependente","O valor mensal ou eventual investido para o futuro do seu dependente","D","INV");
 INSERT INTO categoria(nom_categoria,txt_categoria,ind_categoria,tip_grupo) VALUES("Férias","O valor mensal ou eventual investido para suas próximas férias","D","INV");
 INSERT INTO categoria(nom_categoria,txt_categoria,ind_categoria,tip_grupo) VALUES("Meta","O valor mensal o eventual investido para uma meta específica","D","INV");
@@ -77,3 +76,7 @@ INSERT INTO categoria(nom_categoria,txt_categoria,ind_categoria,tip_grupo) VALUE
 INSERT INTO categoria(nom_categoria,txt_categoria,ind_categoria,tip_grupo) VALUES("Impostos","O valor gasto em impostos federais, estaduais ou municipais","D","IMP");
 INSERT INTO categoria(nom_categoria,txt_categoria,ind_categoria,tip_grupo) VALUES("Taxas","O valor gasto com taxas de bancos, de cartão ou pacotes de serviços","D","IMP");
 INSERT INTO categoria(nom_categoria,txt_categoria,ind_categoria,tip_grupo) VALUES("Multas","O valor gasto com multas diferentes de trânsito","D","IMP");
+#Usuario
+INSERT INTO usuario(nom_usuario,eml_usuario,tip_origem) VALUES("JP","jp.trabalho@gmail.com","ADM");
+INSERT INTO usuario(nom_usuario,eml_usuario,tip_origem) VALUES("Trajanux","eliezer@trajanux.com.br","ADM");
+INSERT INTO usuario(nom_usuario,eml_usuario,tip_origem) VALUES("Toscano","felipe.toscano@gmail.com","ADM");

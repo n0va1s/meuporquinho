@@ -70,7 +70,7 @@
       return "default";
     } else {
       //"" e a raiz do site
-      //Verificar se a pagina solciitada esta dentro das opcoes validas
+      //Verificar se a pagina solciitada esta dentro das opcoes no menu
       $menu = array("orcamento","arquivo","grafico","regra","login");
       if(in_array($destino, $menu) AND file_exists("./assets/$destino.php")){
         return $destino;
@@ -84,7 +84,7 @@
   function rotear($pagina){
     switch ($pagina) {
     case "arquivo":
-        $controller = new ArquivoController();
+        $controller = new LancamentoController();
         $controller->executar();
         break;
     case "grafico":

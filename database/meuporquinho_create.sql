@@ -37,12 +37,13 @@ CREATE TABLE IF NOT EXISTS lancamento (
   seq_lancamento INT(6) AUTO_INCREMENT
   ,seq_usuario INT(6) COMMENT 'Identificador o dono dos lancamentos'
   ,dat_lancamento TIMESTAMP NOT NULL
-  ,dia_lancamento TINYINT NOT NULL
-  ,mes_lancamento TINYINT NOT NULL
-  ,ano_lancamento TINYINT NOT NULL
+  ,dia_lancamento CHAR(2) NOT NULL
+  ,mes_lancamento CHAR(2) NOT NULL
+  ,ano_lancamento CHAR(4) NOT NULL
   ,val_lancamento FLOAT NOT NULL COMMENT 'Valor com sinal de +/- para identificar a receita ou a despesa'
   ,num_lancamento VARCHAR(50) NOT NULL
   ,txt_lancamento VARCHAR(100) NOT NULL
+  ,txt_origem VARCHAR(50) NOT NULL
   ,seq_categoria INT(6) COMMENT 'Identificador da categoria do lancamento'
   ,PRIMARY KEY (seq_lancamento, seq_usuario)
   ,FOREIGN KEY (seq_usuario) REFERENCES usuario(seq_usuario)

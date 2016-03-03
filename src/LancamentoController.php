@@ -1,9 +1,9 @@
 <?php
 
 require_once 'View.php';
-require_once 'ArquivoModel.php';
+require_once 'LancamentoModel.php';
 
-class ArquivoController
+class LancamentoController
 {
 
     private $view;
@@ -11,7 +11,7 @@ class ArquivoController
 
     public function __construct(){
       $this->view = new View();
-      $this->model = new ArquivoModel();
+      $this->model = new LancamentoModel();
       $this->executar();
     }
 
@@ -19,10 +19,12 @@ class ArquivoController
       $arquivo = $_FILES["arquivo"];
       if(isset($arquivo)){
         $this->model->validar($arquivo);
-        //Carregar o arquivo com os lancamentos de receita e despesa
+        //Carregar o arquivo local para o site
         $this->model->importar($arquivo);
+
         //Mensagem de sucesso
-        echo "Oink! Arquivo carregado! Verifique na página inicial os novos valores.";
+        echo "Oink! Receitas e despesas carregadas!";
+        $this->view->encaminhar("default");
       } else {
         echo "Não recebi nenhum arquivo pra mastigar... oink...";
       }
@@ -34,4 +36,4 @@ class ArquivoController
     }
 }
 
-$obj = new ArquivoController();
+$obj = new LancamentoController();

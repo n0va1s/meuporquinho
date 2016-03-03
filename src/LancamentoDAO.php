@@ -12,16 +12,16 @@ class LancamentoDAO {
 
     public function inserir(LancamentoModel $model) {
         try {
-            $query = "insert into message (seq_usuario,dat_lancamento,
-                                           dia_lancamento,mes_lancamento,
-                                           ano_lancamento,val_lancamento,
-                                           num_lancamento,txt_lancamento,
-                                           seq_categoria)
-                                   values (:seq_usuario,:dat_lancamento,
-                                           :dia_lancamento,:mes_lancamento,
-                                           :ano_lancamento,:val_lancamento,
-                                           :num_lancamento,:txt_lancamento,
-                                           :seq_categoria)";
+            $query = "insert into lancamento (seq_usuario,dat_lancamento,
+                                             dia_lancamento,mes_lancamento,
+                                             ano_lancamento,val_lancamento,
+                                             num_lancamento,txt_lancamento,
+                                             txt_origem,seq_categoria)
+                                     values (:seq_usuario,:dat_lancamento,
+                                             :dia_lancamento,:mes_lancamento,
+                                             :ano_lancamento,:val_lancamento,
+                                             :num_lancamento,:txt_lancamento,
+                                             :txt_origem,:seq_categoria)";
 
             $stmt = $this->conn->prepare($query);
 
@@ -33,6 +33,7 @@ class LancamentoDAO {
             $stmt->bindValue(":val_lancamento", $model->getValLancamento());
             $stmt->bindValue(":num_lancamento", $model->getNumLancamento());
             $stmt->bindValue(":txt_lancamento", $model->getTxtLancamento());
+            $stmt->bindValue(":txt_origem", $model->getTxtOrigem());
             $stmt->bindValue(":seq_categoria", $model->getSeqCategoria());
 
             return $stmt->execute();
@@ -52,6 +53,7 @@ class LancamentoDAO {
                             val_lancamento = :val_lancamento,
                             num_lancamento = :num_lancamento,
                             txt_lancamento = :txt_lancamento,
+                            txt_origem = :txt_origem,
                             seq_categoria = :seq_categoria
                       where seq_lancamento = :seq_lancamento";
 
@@ -65,6 +67,7 @@ class LancamentoDAO {
             $stmt->bindValue(":val_lancamento", $model->getValLancamento());
             $stmt->bindValue(":num_lancamento", $model->getNumLancamento());
             $stmt->bindValue(":txt_lancamento", $model->getTxtLancamento());
+            $stmt->bindValue(":txt_origem", $model->getTxtOrigem());
             $stmt->bindValue(":seq_categoria", $model->getSeqCategoria());
             $stmt->bindValue(":seq_lancamento", $model->getSeqLancamento());
 

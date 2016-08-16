@@ -1,0 +1,98 @@
+<header id="masthead" class="site-header" role="banner">
+    <div class="site-header-head clearfix">
+        <div class="container header-user h-card">
+            <div class="header-user-name pull-left">
+                <span class="p-name"> Entrar </span>
+                <i class="fa fa-user"></i>
+            </div>
+            <div class="header-tour-package pull-right">
+                <span>Destaques</span>
+                <i class="fa fa-bars"></i>
+                <section class="header-tour-listing clearfix">
+                    <h1 class="hide">Lista</h1>
+                    <article class="header-tour clearfix">
+                        <figure class="feature-img">
+                            <img src="/images/header-tour-img.jpg" alt="Header Image"/>
+                        </figure>
+                        <div class="contents">
+                            <h6 class="entry-title">Viagens de fim de semana</h6>
+                            <span class="days pull-left"><i class="fa fa-clock-o"></i> <= 3 dias</span>
+                            <span class="t-btn btn-black pull-right">Leia mais</span>
+                        </div>
+                    </article>
+                    <article class="header-tour clearfix">
+                        <figure class="feature-img">
+                            <img src="/images/header-tour-img.jpg" alt="Header Image"/>
+                        </figure>
+                        <div class="contents">
+                            <h6 class="entry-title">Viagens com crianças</h6>
+                            <span class="days pull-left"><i class="fa fa-clock-o"></i> Dicas</span>
+                            <span class="t-btn btn-black pull-right">Leia mais</span>
+                        </div>
+                    </article>
+                    <article class="header-tour clearfix">
+                        <figure class="feature-img">
+                            <img src="/images/header-tour-img.jpg" alt="Header Image"/>
+                        </figure>
+                        <div class="contents">
+                            <h6 class="entry-title">Culinária peruana</h6>
+                            <span class="days pull-left"><i class="fa fa-clock-o"></i> Delícias</span>
+                            <span class="t-btn btn-black pull-right">Leia mais</span>
+                        </div>
+                    </article>
+                    <article class="header-tour clearfix">
+                        <figure class="feature-img">
+                            <img src="/images/header-tour-img.jpg" alt="Header Image"/>
+                        </figure>
+                        <div class="contents">
+                            <h6 class="entry-title">Viagens para públicos</h6>
+                            <span class="days pull-left"><i class="fa fa-clock-o"></i> LGBT</span>
+                            <span class="t-btn btn-black pull-right">Leia mais</span>
+                        </div>
+                    </article>
+                </section>
+            </div>
+            <div class="header-user-tel pull-right">
+                <i class="fa fa-mobile-phone fa-lg"></i>
+                <span class="tel">+55 61 99999-9999</span>
+            </div>
+
+            <div class="header-user-email pull-right">
+                <i class="fa fa-envelope-o"></i>
+                <a class="u-url" href="mailto:faleconosco@trwip.com">faleconosco@trwip.com</a>
+            </div>
+        </div>
+    </div>
+    <div class="site-branding">
+        <div class="container">
+            <h1 class="site-title pull-left">
+                <a href="{{ url('index') }}" rel="home">
+                    <img src="/images/logo.png" alt="Marca da TRWIP" width="250em"/>
+                </a>
+            </h1>
+            <div class="header-search pull-right clearfix">
+                <i class="fa fa-search"></i>
+                <div class="search clearfix">
+                    <form method="get"  class="search-form" action="#">
+                        <div>
+                            <input type="text" placeholder="Search" name="s" class="search-text" >
+                            <input type="submit" class="search-submit" value="" >
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <nav class="main-nav pull-right" role="navigation">
+                <div class="menu-primary-menu-container">
+                    <ul id="menu-primary-menu" class="main-menu">
+                        <!--Ao inves de usar a URL absoluta, optei por usar o URLGenerator do Twig
+                        e chamar pelo nome da rota -->
+                        <li><a href="{{ url('index') }}">Início</a></li>
+                        <li><a href="{{ url('step1') }}">Crie sua viagem</a></li>
+                        <li><a href="{{ url('find-travel') }}">Pesquise sua viagem</a></li>
+                        <li><a href="{{ url('contact') }}">Fale conosco</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div><!-- .container -->
+    </div><!-- .site-branding -->
+</header><!-- .site-header -->

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% include 'header.twig' %}
+</head>
+
+<body>
+    <div id="page" class="hfeed site">
+        {% include 'site-header.twig' %}
+        {% block content %}{% endblock %}
+        {% include 'footer.twig' %}
+    </div><!-- .site -->
+    {% include 'scripts.twig' %}
+</body>
+</html>

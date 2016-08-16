@@ -31,7 +31,11 @@ class UsuarioModel {
     }
 
     public function setSenUsuario($senUsuario) {
-        $this->senUsuario = $senUsuario;
+        $options = [
+          'salt'=>'Uma frase segura para gerar a senha',
+          'cost'=>10
+        ]
+        $this->senUsuario = password_hash($senUsuario, PASSWORD_DEFAULT,$options);
     }
 
     public function setDatInativo($datInativo) {
@@ -63,18 +67,43 @@ class UsuarioModel {
     }
 
     public function autenticar() {
-        if($this->getEmlUsuario() == "GOO"){
-          //chamar a autenticacao do Google
-        } elseif ($this->getEmlUsuario() == "FAC") {
-          //chamar a autenticacao do Facebook
-        } else { //autenticacao na base local
-          if(!empty($this->getEmlUsuario()) && !empty($this->getSenUsuario())){
-             $this->usuarioDAO->logar();
-             return true;
-          } else {
-            return false;
-          }
+      if($this->getEmlUsuario() == "GOO"){
+        //chamar a autenticacao do Google
+      } elseif ($this->getEmlUsuario() == "FAC") {
+        //chamar a autenticacao do Facebook
+      } else { //autenticacao na base local
+        if(!empty($this->getEmlUsuario()) && !empty($this->getSenUsuario())){
+           session_start();
+           //var_dump(assword_get_info($this->getSenUsuario()));
+           $logado = false;
+           if($this->getEmlUsuario() <> $usuario && password_verify($this->getSenUsuario(), $senha)){
+             echo "O usuário informado não confere com o cadastro";
+           }
+
+           if($this->getEmlUsuario() == $usuario && !password_verify($this->getSenUsuario(), $senha)){
+             echo "A senha informada não confere com o cadastro";
+           }
+
+           $logado = $this->usuarioDAO->logar(!empty($this->getEmlUsuario()),
+                                              !empty($this->getSenUsuario()));
+           if($logado){
+             $_SESSION['logado'] = true;
+             echo "Login realizado com sucesso!";
+           } else {
+             $_SESSION['logado'] = false;
+             echo "Combinação de usuário e senha inválida";
+           }
+           return true;
+        } else {
+          echo "Informe o usuário e a senha";
+          return false;
         }
+      }
+    }
+
+    public function desconectar() {
+        unset($_SESSION['logado']);
+        session_destroy();
     }
 
     public function gravar() {

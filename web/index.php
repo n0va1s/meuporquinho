@@ -15,7 +15,8 @@ $app->get('/contato', function () use ($app) {
 
 //Rotas da viagem
 $app['monolog']->addDebug('Montou a rota de viagem');
-$app->mount('/viagem', new Trwip\Controller\ViagemControllerProvider());
+$app->mount('/interface', new Trwip\Controller\InterfaceControllerProvider());
+$app->mount('/service', new Trwip\Controller\ServiceControllerProvider());
 
 $app['monolog']->addDebug('Executou a aplicacao');
 $app->run();

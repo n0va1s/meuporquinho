@@ -86,3 +86,54 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci
 COMMENT = 'Relaciona os lancamentos de receita ou despesa vindas da conta corrente, do cartao de credito, do lancamento manual e sua categoria';
+
+CREATE VIEW vw_lancamento AS
+select l.seq_lancamento, l.seq_usuario,l.seq_categoria,l.dat_lancamento,
+       l.mes_lancamento,l.ano_lancamento,l.val_lancamento,l.txt_lancamento,
+       l.tip_origem,l.nom_origem,l.txt_origem,l.cod_identificacao,
+       l.dat_cadastro,l.dat_inativo,l.tipo_id,c.ind_categoria,c.nom_categoria,
+       c.tip_grupo,g.nom_grupo
+from lancamento l
+  join categoria c
+    on l.seq_categoria = c.seq_categoria
+  join categoria_grupo g
+    on c.tip_grupo = g.tip_grupo;
+
+CREATE VIEW vw_despesa AS 
+select l.seq_lancamento, l.seq_usuario,l.seq_categoria,l.dat_lancamento,
+       l.mes_lancamento,l.ano_lancamento,l.val_lancamento,l.txt_lancamento,
+       l.tip_origem,l.nom_origem,l.txt_origem,l.cod_identificacao,
+       l.dat_cadastro,l.dat_inativo,l.tipo_id,c.nom_categoria,
+       c.tip_grupo,g.nom_grupo
+from lancamento l
+  join categoria c
+    on l.seq_categoria = c.seq_categoria
+  join categoria_grupo g
+    on c.tip_grupo = g.tip_grupo
+where c.ind_categoria = 'D';
+
+CREATE VIEW vw_receita AS 
+select l.seq_lancamento, l.seq_usuario,l.seq_categoria,l.dat_lancamento,
+       l.mes_lancamento,l.ano_lancamento,l.val_lancamento,l.txt_lancamento,
+       l.tip_origem,l.nom_origem,l.txt_origem,l.cod_identificacao,
+       l.dat_cadastro,l.dat_inativo,l.tipo_id,c.nom_categoria,
+       c.tip_grupo,g.nom_grupo
+from lancamento l
+  join categoria c
+    on l.seq_categoria = c.seq_categoria
+  join categoria_grupo g
+    on c.tip_grupo = g.tip_grupo
+where c.ind_categoria = 'R';
+
+CREATE VIEW vw_investimento AS 
+select l.seq_lancamento, l.seq_usuario,l.seq_categoria,l.dat_lancamento,
+       l.mes_lancamento,l.ano_lancamento,l.val_lancamento,l.txt_lancamento,
+       l.tip_origem,l.nom_origem,l.txt_origem,l.cod_identificacao,
+       l.dat_cadastro,l.dat_inativo,l.tipo_id,c.nom_categoria,
+       c.tip_grupo,g.nom_grupo
+from lancamento l
+  join categoria c
+    on l.seq_categoria = c.seq_categoria
+  join categoria_grupo g
+    on c.tip_grupo = g.tip_grupo
+where c.ind_categoria = 'I';

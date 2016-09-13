@@ -61,3 +61,23 @@ inner join categoria c
 inner join tipo t
    on c.tipo_id = t.id
 */
+
+/* ELIEZER */////////////////////////////////////////////////////////////////////////////////////////
+
+INSERT INTO `lancamento` (`seq_lancamento`, `seq_usuario`, `seq_categoria`, `dat_lancamento`, `mes_lancamento`, `ano_lancamento`, `val_lancamento`, `txt_lancamento`, `tip_origem`, `nom_origem`, `txt_origem`, `cod_identificacao`)
+SELECT id,
+       2,
+       0,
+       STR_TO_DATE(DATA,'%d/%m/%Y'),
+       mes,
+       ano,
+       valor,
+       item,
+       CASE
+           WHEN (tiporegistro ='Débito em Conta') THEN 'DEB'
+           WHEN (tiporegistro ='Cartão de Crédito') THEN 'CRE'
+       END,
+       banco,
+       agenciacontacartao,
+       identificacao
+FROM trajanux.tarefas;
